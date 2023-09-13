@@ -52,7 +52,6 @@ fun MovieListItemComposablePreview() {
                 movie = Movie(
                     id = "",
                     title = "The Avengers",
-                    year = "2019",
                     posterUrl = ""
                 )
             )
