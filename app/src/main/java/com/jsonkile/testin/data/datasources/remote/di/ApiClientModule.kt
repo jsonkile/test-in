@@ -1,4 +1,4 @@
-package com.jsonkile.testin.data.datasources.di
+package com.jsonkile.testin.data.datasources.remote.di
 
 import com.jsonkile.testin.data.datasources.remote.build
 import dagger.Module

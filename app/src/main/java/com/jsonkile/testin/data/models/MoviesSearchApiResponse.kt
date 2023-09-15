@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MoviesApiResponse(
+data class MoviesSearchApiResponse(
     @SerialName("Response")
     val response: String? = "",
     @SerialName("Search")
@@ -21,5 +21,12 @@ data class MoviesApiResponse(
         val poster: String? = "",
         @SerialName("Title")
         val title: String? = "",
+    )
+}
+
+
+fun MoviesSearchApiResponse.toMovieDataLayer(): List<MovieDataLayer> = this.search.orEmpty().map {
+    MovieDataLayer(
+        imdbID = it?.imdbID.orEmpty(), poster = it?.poster.orEmpty(), title = it?.title.orEmpty()
     )
 }

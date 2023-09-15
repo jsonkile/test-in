@@ -5,9 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jsonkile.testin.data.models.toMovieUILayer
 import com.jsonkile.testin.data.repos.MoviesRepository
-import com.jsonkile.testin.ui.models.Movie
-import com.jsonkile.testin.util.toMoviesList
+import com.jsonkile.testin.ui.models.MovieUILayer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,7 +17,7 @@ class HomeViewModel @Inject constructor(private val moviesRepository: MoviesRepo
     ViewModel() {
 
     data class HomeUiState(
-        val movies: List<Movie> = emptyList(),
+        val movies: List<MovieUILayer> = emptyList(),
         val message: String? = null,
         val isFetchingMovies: Boolean = false,
         val searchKeyword: String = ""
@@ -26,16 +26,33 @@ class HomeViewModel @Inject constructor(private val moviesRepository: MoviesRepo
     var homeUiState by mutableStateOf(HomeUiState())
         private set
 
-    fun search(keyword: String, refresh: Boolean = false) {
+    init {
+        searchMovies(false)
+    }
+
+    fun searchMovies(refresh: Boolean = false) {
         viewModelScope.launch {
-            val result = moviesRepository.searchMovies(keyword = keyword, refresh = refresh)
-            updateUiStateMovies(result.toMoviesList())
+            try {
+                homeUiState = homeUiState.copy(isFetchingMovies = true, movies = emptyList())
+                val result = moviesRepository.searchMovies(
+                    keyword = homeUiState.searchKeyword,
+                    refresh = refresh
+                )
+                homeUiState = homeUiState.copy(message = result.size.toString())
+                homeUiState = homeUiState.copy(movies = result.toMovieUILayer())
+            } catch (e: Exception) {
+                homeUiState = homeUiState.copy(message = e.message)
+            } finally {
+                homeUiState = homeUiState.copy(isFetchingMovies = false)
+            }
         }
     }
 
-    private fun updateUiStateMovies(movies: List<Movie>) {
-        homeUiState = homeUiState.copy(movies = movies)
+    fun updateUiStateSearchKeyword(keyword: String) {
+        homeUiState = homeUiState.copy(searchKeyword = keyword)
+    }
+
+    fun clearMessage() {
+        homeUiState = homeUiState.copy(message = null)
     }
 }
-
-val HomeViewModel.HomeUiState.showResultsSection: Boolean get() = !isFetchingMovies && movies.isNotEmpty()

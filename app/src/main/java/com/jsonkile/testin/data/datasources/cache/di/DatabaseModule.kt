@@ -1,4 +1,4 @@
-package com.jsonkile.testin.data.datasources.di
+package com.jsonkile.testin.data.datasources.cache.di
 
 import android.content.Context
 import androidx.room.Room

@@ -1,7 +1,7 @@
 package com.jsonkile.testin.data.datasources.cache
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.jsonkile.testin.data.models.MovieItem
+import com.jsonkile.testin.data.models.MovieDataLayer
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Assert
@@ -33,7 +33,7 @@ class MoviesRoomReadWriteDeleteTest {
     fun writeReadAndDeleteMovies() {
         moviesDao.insertAll(
             movies = arrayOf(
-                MovieItem(
+                MovieDataLayer(
                     imdbID = "123",
                     keyword = "sos",
                     poster = "poster",
@@ -51,7 +51,7 @@ class MoviesRoomReadWriteDeleteTest {
 
         moviesDao.deleteAll()
 
-        Assert.assertEquals(emptyList<MovieItem>(), moviesDao.getAll("sos"))
+        Assert.assertEquals(emptyList<MovieDataLayer>(), moviesDao.getAll("sos"))
     }
 
 }

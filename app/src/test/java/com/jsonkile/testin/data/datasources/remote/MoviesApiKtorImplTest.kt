@@ -1,12 +1,14 @@
 package com.jsonkile.testin.data.datasources.remote
 
-import com.jsonkile.testin.data.models.MoviesApiResponse
+import com.jsonkile.testin.data.models.MoviesSearchApiResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.client.engine.mock.respondError
 import io.ktor.client.request.get
+import io.ktor.client.request.parameter
+import io.ktor.client.statement.request
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
@@ -20,7 +22,7 @@ class MoviesApiKtorImplTest {
 
     @Test
     fun `test that call returns correct response value from result when success`() {
-        val mockEngine = MockEngine { request ->
+        val mockEngine = MockEngine { _ ->
             respond(
                 content = ByteReadChannel(
                     """{"Search":[
@@ -47,14 +49,14 @@ class MoviesApiKtorImplTest {
         runBlocking {
             assertEquals(
                 "True",
-                client.get("http://www.omdbapi.com").body<MoviesApiResponse>().response
+                client.get("http://www.omdbapi.com").body<MoviesSearchApiResponse>().response
             )
         }
     }
 
     @Test
     fun `test that call returns correct number of items from result when success`() {
-        val mockEngine = MockEngine { request ->
+        val mockEngine = MockEngine { _ ->
             respond(
                 content = ByteReadChannel(
                     """{"Search":[
@@ -81,7 +83,7 @@ class MoviesApiKtorImplTest {
         runBlocking {
             assertEquals(
                 10,
-                client.get("http://www.omdbapi.com").body<MoviesApiResponse>().search?.size
+                client.get("http://www.omdbapi.com").body<MoviesSearchApiResponse>().search?.size
             )
         }
     }
@@ -125,6 +127,27 @@ class MoviesApiKtorImplTest {
             runBlocking {
                 client.get("http://www.omdbapi.com").body()
             }
+        }
+    }
+
+    @Test
+    fun `test that correct endpoint is called`() {
+        val mockEngine = MockEngine { _ ->
+            respond(
+                content = "Success",
+                status = HttpStatusCode.OK,
+                headers = headersOf(HttpHeaders.ContentType, "application/json")
+            )
+        }
+
+        val client = HttpClient(mockEngine) {
+            build()
+        }
+
+        runBlocking {
+            assertEquals("http://www.omdbapi.com?s=test&apiKey=27e706a2", client.get {
+                parameter("s", "test")
+            }.request.url.toString())
         }
     }
 }

@@ -19,10 +19,6 @@ abstract class DataSourcesModule {
     @Binds
     abstract fun bindMoviesApi(moviesApiKtorImpl: MoviesApiKtorImpl): MoviesApi
 
-    @Singleton
-    @Binds
-    abstract fun bindMoviesRepository(moviesRepositoryImpl: MoviesRepositoryImpl): MoviesRepository
-
     @MoviesRemoteDataSource
     @Singleton
     @Binds
