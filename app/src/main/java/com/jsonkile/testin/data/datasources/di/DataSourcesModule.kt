@@ -1,10 +1,6 @@
 package com.jsonkile.testin.data.datasources.di
 
 import com.jsonkile.testin.data.datasources.MoviesDataSource
-import com.jsonkile.testin.data.datasources.remote.MoviesApi
-import com.jsonkile.testin.data.datasources.remote.MoviesApiKtorImpl
-import com.jsonkile.testin.data.repos.MoviesRepository
-import com.jsonkile.testin.data.repos.MoviesRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,10 +10,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class DataSourcesModule {
-
-    @Singleton
-    @Binds
-    abstract fun bindMoviesApi(moviesApiKtorImpl: MoviesApiKtorImpl): MoviesApi
 
     @MoviesRemoteDataSource
     @Singleton

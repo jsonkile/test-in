@@ -7,20 +7,20 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jsonkile.testin.data.models.toMovieDetailsUILayer
-import com.jsonkile.testin.data.models.toMovieUILayer
 import com.jsonkile.testin.data.repos.MoviesRepository
 import com.jsonkile.testin.ui.models.MovieDetailsUILayer
-import com.jsonkile.testin.ui.models.MovieUILayer
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class MovieDetailsViewModel @Inject constructor(
-    stateHandle: SavedStateHandle,
+    private val stateHandle: SavedStateHandle,
     private val moviesRepository: MoviesRepository
 ) :
     ViewModel() {
 
-    val imdbID = checkNotNull(stateHandle.get<String>("imdbID"))
+    val imdbID = checkNotNull(stateHandle.get<String>("id"))
 
     data class MovieDetailsUiState(
         val movieDetailsUILayer: MovieDetailsUILayer? = null,

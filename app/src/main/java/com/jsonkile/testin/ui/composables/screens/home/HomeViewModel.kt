@@ -38,7 +38,6 @@ class HomeViewModel @Inject constructor(private val moviesRepository: MoviesRepo
                     keyword = homeUiState.searchKeyword,
                     refresh = refresh
                 )
-                homeUiState = homeUiState.copy(message = result.size.toString())
                 homeUiState = homeUiState.copy(movies = result.toMovieUILayer())
             } catch (e: Exception) {
                 homeUiState = homeUiState.copy(message = e.message)

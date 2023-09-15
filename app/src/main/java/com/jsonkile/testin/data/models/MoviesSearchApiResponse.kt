@@ -25,8 +25,12 @@ data class MoviesSearchApiResponse(
 }
 
 
-fun MoviesSearchApiResponse.toMovieDataLayer(): List<MovieDataLayer> = this.search.orEmpty().map {
-    MovieDataLayer(
-        imdbID = it?.imdbID.orEmpty(), poster = it?.poster.orEmpty(), title = it?.title.orEmpty()
-    )
-}
+fun MoviesSearchApiResponse.toMovieDataLayer(keyword: String = ""): List<MovieDataLayer> =
+    this.search.orEmpty().map {
+        MovieDataLayer(
+            imdbID = it?.imdbID.orEmpty(),
+            poster = it?.poster.orEmpty(),
+            title = it?.title.orEmpty(),
+            keyword = keyword
+        )
+    }

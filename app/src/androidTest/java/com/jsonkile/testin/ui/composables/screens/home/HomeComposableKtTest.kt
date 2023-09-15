@@ -15,9 +15,11 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import com.jsonkile.testin.ui.models.MovieUILayer
 import com.jsonkile.testin.ui.theme.TestInTheme
+import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
 import org.junit.Test
 
+@HiltAndroidTest
 class HomeComposableKtTest {
 
     @get:Rule

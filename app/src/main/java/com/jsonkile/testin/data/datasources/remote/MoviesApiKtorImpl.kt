@@ -18,7 +18,7 @@ class MoviesApiKtorImpl @Inject constructor(
     override suspend fun searchMovies(keyword: String): List<MovieDataLayer> =
         httpClient.get {
             parameter("s", keyword)
-        }.body<MoviesSearchApiResponse>().toMovieDataLayer()
+        }.body<MoviesSearchApiResponse>().toMovieDataLayer(keyword = keyword)
 
     override suspend fun getMovie(imdbID: String): MovieDetailsDataLayer =
         httpClient.get {
