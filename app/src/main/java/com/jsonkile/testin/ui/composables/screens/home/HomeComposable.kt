@@ -42,7 +42,7 @@ fun HomeComposable(
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
-            .padding(10.dp),
+            .padding(top = 10.dp, start = 10.dp, end = 10.dp),
     ) {
         val (searchTextField, searchButton, resultsList, loadingIndicator) = createRefs()
 
@@ -107,7 +107,7 @@ fun HomeComposable(
                 }
                 .semantics { testTag = results_section_test_tag },
             horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
-            contentPadding = PaddingValues(vertical = 18.dp),
+            contentPadding = PaddingValues(bottom = 70.dp, top = 20.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(homeUiState.movies) { movie ->

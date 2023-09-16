@@ -26,7 +26,7 @@ class MoviesLocalDataSourceTest {
         moviesDao = object : MoviesDao {
             private val movies = mutableListOf(MovieDataLayer(imdbID = "imdbID", title = "title"))
 
-            override fun getAll(keyword: String): List<MovieDataLayer> = movies
+            override fun getAll(): List<MovieDataLayer> = movies
 
             override fun insertAll(vararg movies: MovieDataLayer) {
                 this.movies.addAll(movies)

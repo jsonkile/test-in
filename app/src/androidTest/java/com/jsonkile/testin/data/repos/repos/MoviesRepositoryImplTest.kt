@@ -66,12 +66,12 @@ class MoviesRepositoryImplTest {
         )
 
         Assert.assertEquals(
-            0,
+            10,
             moviesRepository.searchMovies(keyword = "sad", refresh = false).size
         )
 
         Assert.assertEquals(
-            0,
+            10,
             moviesRepository.searchMovies(keyword = "", refresh = false).size
         )
     }
