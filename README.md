@@ -15,12 +15,12 @@ Most data layer components are defined as interfaces. Then, concrete implementat
 These test doubles implement the same interface as the production implementations and generally provide a simplified (but still realistic) implementation with additional testing hooks. This results in less brittle tests that may exercise more production code, instead of just verifying specific calls against mocks.
 
 ## Key Tools and Libraries 
-1. Dependency Injection - **Hilt**
-2. User Interface - **Jetpack Compose**
-3. Network - **Ktor**
-4. Caching - **Room**
-5. Navigation - **Navigation Component**
-6. Roborazzi - **Screenshot Testing**
+1. Dependency Injection - **[Hilt](https://developer.android.com/training/dependency-injection/hilt-android)**
+2. User Interface - **[Jetpack Compose](https://developer.android.com/jetpack/compose)**
+3. Network - **[Ktor](https://ktor.io)**
+4. Caching - **[Room](https://developer.android.com/training/data-storage/room)**
+5. Navigation - **[Navigation Component for Compose](https://developer.android.com/jetpack/compose/navigation)**
+6. Screenshot Testing - **[Roborazzi](https://github.com/takahirom/roborazzi)**
 
 ## Breakdown
 ### Local Tests
@@ -30,15 +30,15 @@ Includes: repositories test, view model tests, ktor client tests, data sources t
 
 ### Instrumented Tests
 Instrumented tests can be found [here](https://github.com/jsonkile/test-in/tree/main/app/src/androidTest/java/com/jsonkile/testin)  
-Hilt is heavily used to provide fakes.  
+Hilt is used to provide fakes.  
 Includes: compose UI tests, integration tests, navigation tests...
 
-### End-to-end tests
+### End-to-end Tests
 User flow tests can be found [here](https://github.com/jsonkile/test-in/tree/main/app/src/androidTest/java/com/jsonkile/testin/endtoend)  
-Hilt is heavily used to provide fakes.  
-Used UIAutomator for automation.
+Hilt is used to provide fakes.  
+Used [UIAutomator](https://developer.android.com/training/testing/other-components/ui-automator) for writing automated tests.
 
-### Screenshot testing
+### Screenshot Tests
 Roborazzi is used to do screenshot tests of screens and components.  
 To run these tests, run the `verifyRoborazziDemoDebug` or `recordRoborazziDemoDebug` tasks. Note that screenshots are recorded on CI, using Linux, and other platforms might generate slightly different images, making the tests fail.
 
