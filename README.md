@@ -20,22 +20,27 @@ These test doubles implement the same interface as the production implementation
 3. Network - **Ktor**
 4. Caching - **Room**
 5. Navigation - **Navigation Component**
+6. Roborazzi - **Screenshot Testing**
 
 ## Breakdown
 ### Local Tests
 Unit tests can be found [here](https://github.com/jsonkile/test-in/tree/main/app/src/test/java/com/jsonkile/testin)  
 No mocking library was used. Dependencies are provided via fakes instead.  
-Includes: repositories test, view model tests, ktor client tests, data sources tests...
+Includes: repositories test, view model tests, ktor client tests, data sources tests, room tests...
 
 ### Instrumented Tests
 Instrumented tests can be found [here](https://github.com/jsonkile/test-in/tree/main/app/src/androidTest/java/com/jsonkile/testin)  
 Hilt is heavily used to provide fakes.  
-Includes: compose UI tests, room tests, integration tests, navigation tests...
+Includes: compose UI tests, integration tests, navigation tests...
 
 ### End-to-end tests
 User flow tests can be found [here](https://github.com/jsonkile/test-in/tree/main/app/src/androidTest/java/com/jsonkile/testin/endtoend)  
 Hilt is heavily used to provide fakes.  
 Used UIAutomator for automation.
+
+### Screenshot testing
+Roborazzi is used to do screenshot tests of screens and components.  
+To run these tests, run the `verifyRoborazziDemoDebug` or `recordRoborazziDemoDebug` tasks. Note that screenshots are recorded on CI, using Linux, and other platforms might generate slightly different images, making the tests fail.
 
 ## Highlights
 Some important things to note about my approach 
