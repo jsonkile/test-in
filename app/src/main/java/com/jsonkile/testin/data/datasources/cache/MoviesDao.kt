@@ -7,8 +7,8 @@ import com.jsonkile.testin.data.models.MovieDataLayer
 
 @Dao
 interface MoviesDao {
-    @Query("SELECT * FROM movies WHERE keyword = :keyword")
-    fun getAll(keyword: String): List<MovieDataLayer>
+    @Query("SELECT * FROM movies")
+    fun getAll(): List<MovieDataLayer>
 
     @Insert
     fun insertAll(vararg movies: MovieDataLayer)

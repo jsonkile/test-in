@@ -42,7 +42,7 @@ class MoviesRoomReadWriteDeleteTest {
             )
         )
 
-        val items = moviesDao.getAll(keyword = "sos")
+        val items = moviesDao.getAll()
 
         Assert.assertEquals(1, items.size)
         Assert.assertEquals("123", items.first().imdbID)
@@ -51,7 +51,7 @@ class MoviesRoomReadWriteDeleteTest {
 
         moviesDao.deleteAll()
 
-        Assert.assertEquals(emptyList<MovieDataLayer>(), moviesDao.getAll("sos"))
+        Assert.assertEquals(emptyList<MovieDataLayer>(), moviesDao.getAll())
     }
 
 }

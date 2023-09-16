@@ -9,13 +9,12 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
+import androidx.test.uiautomator.UiScrollable
+import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
-import com.jsonkile.testin.ui.composables.components.movies_list_item_test_tag
 import com.jsonkile.testin.ui.composables.screens.home.results_section_test_tag
 import com.jsonkile.testin.ui.composables.screens.home.search_button_test_tag
 import com.jsonkile.testin.ui.composables.screens.home.search_text_field_test_tag
-import com.jsonkile.testin.ui.composables.screens.moviedetails.back_button_test_tag
-import com.jsonkile.testin.ui.composables.screens.moviedetails.director_text_test_tag
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Assert
@@ -27,7 +26,7 @@ import org.junit.runner.RunWith
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 @SdkSuppress(minSdkVersion = 18)
-class StartUpToHomeToMovieDetailsFlowTest {
+class ScrollMoviesListTest {
 
     private lateinit var uiDevice: UiDevice
 
@@ -53,7 +52,7 @@ class StartUpToHomeToMovieDetailsFlowTest {
     }
 
     @Test
-    fun testUserFlow() {
+    fun test_scrollThroughMovies_andFindOne() {
         val homeSearchField: UiObject2 = uiDevice.findObject(By.res(search_text_field_test_tag))
         val homeSearchButton: UiObject2 = uiDevice.findObject(By.res(search_button_test_tag))
 
@@ -62,21 +61,19 @@ class StartUpToHomeToMovieDetailsFlowTest {
 
         Assert.assertEquals(
             true,
-            uiDevice.wait(Until.hasObject(By.res(results_section_test_tag)), LAUNCH_TIMEOUT)
+            uiDevice.wait(Until.hasObject(By.res(results_section_test_tag)), RELAUNCH_TIMEOUT)
         )
 
-        val movieListItem: UiObject2 = uiDevice.findObject(By.res(movies_list_item_test_tag))
-        movieListItem.click()
+        val scrollable =
+            UiScrollable(UiSelector().resourceId(results_section_test_tag).scrollable(true))
 
-        val directorTextField: UiObject2 = uiDevice.findObject(By.res(director_text_test_tag))
-        Assert.assertEquals("Director: Dennis Dugan", directorTextField.text)
+        while (scrollable.scrollForward()){}
 
-        val backButton: UiObject2 = uiDevice.findObject(By.res(back_button_test_tag))
-        backButton.click()
+        scrollable.scrollTextIntoView("Happy New Year")
 
         Assert.assertEquals(
             true,
-            uiDevice.wait(Until.hasObject(By.res(movies_list_item_test_tag)), LAUNCH_TIMEOUT)
+            uiDevice.wait(Until.hasObject(By.textContains("Happy New Year")), RELAUNCH_TIMEOUT)
         )
     }
 }

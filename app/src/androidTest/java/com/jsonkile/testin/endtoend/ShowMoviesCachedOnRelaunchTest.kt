@@ -14,8 +14,6 @@ import com.jsonkile.testin.ui.composables.components.movies_list_item_test_tag
 import com.jsonkile.testin.ui.composables.screens.home.results_section_test_tag
 import com.jsonkile.testin.ui.composables.screens.home.search_button_test_tag
 import com.jsonkile.testin.ui.composables.screens.home.search_text_field_test_tag
-import com.jsonkile.testin.ui.composables.screens.moviedetails.back_button_test_tag
-import com.jsonkile.testin.ui.composables.screens.moviedetails.director_text_test_tag
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Assert
@@ -27,7 +25,7 @@ import org.junit.runner.RunWith
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 @SdkSuppress(minSdkVersion = 18)
-class StartUpToHomeToMovieDetailsFlowTest {
+class ShowMoviesCachedOnRelaunchTest {
 
     private lateinit var uiDevice: UiDevice
 
@@ -53,7 +51,7 @@ class StartUpToHomeToMovieDetailsFlowTest {
     }
 
     @Test
-    fun testUserFlow() {
+    fun test_cachedMoviesShowOnRelaunch() {
         val homeSearchField: UiObject2 = uiDevice.findObject(By.res(search_text_field_test_tag))
         val homeSearchButton: UiObject2 = uiDevice.findObject(By.res(search_button_test_tag))
 
@@ -65,18 +63,18 @@ class StartUpToHomeToMovieDetailsFlowTest {
             uiDevice.wait(Until.hasObject(By.res(results_section_test_tag)), LAUNCH_TIMEOUT)
         )
 
-        val movieListItem: UiObject2 = uiDevice.findObject(By.res(movies_list_item_test_tag))
-        movieListItem.click()
+        uiDevice.pressBack()
+        uiDevice.pressHome()
 
-        val directorTextField: UiObject2 = uiDevice.findObject(By.res(director_text_test_tag))
-        Assert.assertEquals("Director: Dennis Dugan", directorTextField.text)
-
-        val backButton: UiObject2 = uiDevice.findObject(By.res(back_button_test_tag))
-        backButton.click()
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val intent = context.packageManager.getLaunchIntentForPackage(PACKAGE)?.apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        }
+        context.startActivity(intent)
 
         Assert.assertEquals(
             true,
-            uiDevice.wait(Until.hasObject(By.res(movies_list_item_test_tag)), LAUNCH_TIMEOUT)
+            uiDevice.wait(Until.hasObject(By.res(movies_list_item_test_tag)), RELAUNCH_TIMEOUT)
         )
     }
 }
