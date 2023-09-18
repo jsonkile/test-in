@@ -1,5 +1,5 @@
 # Android Testing Exhibition
-A sample repo to demonstrate testing in Android using guidelines from Google's office [documentation](https://developer.android.com/training/testing)
+A sample repo to demonstrate testing in Android using guidelines from Google's official [documentation](https://developer.android.com/training/testing)
 
 <img width="250" alt="Screenshot 2023-09-16 at 14 35 38" src="https://github.com/jsonkile/test-in/assets/20788593/cb9b7583-2414-4262-8025-fceaeec3c447">
 <img width="250" alt="Screenshot 2023-09-16 at 14 36 04" src="https://github.com/jsonkile/test-in/assets/20788593/fb3e8233-5b2d-48d8-afb1-2d2e884ae0c6">
