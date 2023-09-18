@@ -42,7 +42,7 @@ Used [UIAutomator](https://developer.android.com/training/testing/other-componen
 
 ### Screenshot Tests
 Roborazzi is used to do screenshot tests of screens and components.  
-To run these tests, run the `verifyRoborazziDemoDebug` or `recordRoborazziDemoDebug` tasks. Note that screenshots are recorded on CI, using Linux, and other platforms might generate slightly different images, making the tests fail.
+To run these tests, run the `verifyRoborazziDebug` or `recordRoborazziDebug` tasks. Note that screenshots are recorded on CI, using Linux, and other platforms might generate slightly different images, making the tests fail.
 
 ## Highlights
 Some important things to note about my approach 
