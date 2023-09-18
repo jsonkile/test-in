@@ -1,5 +1,5 @@
 # Android Testing Exhibition
-A sample repo to demonstrate testing in Android using guidelines from Google's [documentation](https://developer.android.com/training/testing)
+A sample repo to demonstrate testing in Android using guidelines from Google's office [documentation](https://developer.android.com/training/testing)
 
 <img width="250" alt="Screenshot 2023-09-16 at 14 35 38" src="https://github.com/jsonkile/test-in/assets/20788593/cb9b7583-2414-4262-8025-fceaeec3c447">
 <img width="250" alt="Screenshot 2023-09-16 at 14 36 04" src="https://github.com/jsonkile/test-in/assets/20788593/fb3e8233-5b2d-48d8-afb1-2d2e884ae0c6">
@@ -9,6 +9,7 @@ A sample repo to demonstrate testing in Android using guidelines from Google's [
 The app follows Google's official architecture [guidance](https://developer.android.com/topic/architecture)
 
 ## Overview
+The repo covers testing from unit to end-to-end and screenshot testing. 
 The app uses dependency injection with Hilt to facilitate the testing of components.
 
 Most data layer components are defined as interfaces. Then, concrete implementations (with various dependencies) are bound to provide those interfaces to other components in the app. In tests, the app does not use any mocking libraries. Instead, the production implementations can be replaced with test doubles using Hilt's testing APIs (or via manual constructor injection).
