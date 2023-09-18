@@ -41,7 +41,8 @@ Hilt is used to provide fakes.
 Used [UIAutomator](https://developer.android.com/training/testing/other-components/ui-automator) for writing automated tests.
 
 ### Screenshot Tests
-Roborazzi is used to do screenshot tests of screens and components.  
+Local tests of composable screens and components can be found [here](https://github.com/jsonkile/test-in/tree/main/app/src/test/java/com/jsonkile/testin) 
+Roborazzi is used to do screenshot tests.  
 To run these tests, run the `verifyRoborazziDebug` or `recordRoborazziDebug` tasks. Note that screenshots are recorded on CI, using Linux, and other platforms might generate slightly different images, making the tests fail.
 
 ## Highlights
